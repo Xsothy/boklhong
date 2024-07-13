@@ -1,24 +1,24 @@
 {
   "compilerOptions": {
     /* Base Options: */
-    //    "esModuleInterop": true,
-    //    "skipLibCheck": true,
-    //    "target": "es2022",
-    //    "allowJs": true,
-    //    "resolveJsonModule": true,
-    //    "moduleDetection": "force",
-    //    "isolatedModules": true,
+       "esModuleInterop": true,
+       "skipLibCheck": true,
+       "target": "es2022",
+       "allowJs": true,
+       "resolveJsonModule": true,
+       "moduleDetection": "force",
+       "isolatedModules": true,
     /* Strictness */
     "strict": true,
     "exactOptionalPropertyTypes": true,
     /* Bundled projects */
-    //    "lib": ["dom", "dom.iterable", "ES2022"],
-    //    "noEmit": true,
-    //    "module": "ESNext",
-    //    "moduleResolution": "Bundler",
-    //    "jsx": "preserve",
-    //    "plugins": [{ "name": "next" }],
-    //    "incremental": true,
+       "lib": ["dom", "dom.iterable", "ES2022"],
+       "noEmit": true,
+       "module": "ESNext",
+       "moduleResolution": "Bundler",
+       "jsx": "preserve",
+       "plugins": [{ "name": "next" }],
+       "incremental": true,
     /* Path Aliases */
     "baseUrl": ".",
     "paths": {
@@ -28,27 +28,7 @@
       "~/*": [
         "./src/*"
       ]
-    },
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "noEmit": true,
-    "incremental": true,
-    "module": "esnext",
-    "esModuleInterop": true,
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
+    }
   },
   "include": [
     ".eslintrc.cjs",

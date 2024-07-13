@@ -1,5 +1,5 @@
 import type { Config } from "tailwindcss"
-import { fontFamily as fontFamilyConfig } from "tailwindcss/defaultTheme"
+
 const config = {
   darkMode: ["class"],
   content: [
@@ -72,12 +72,9 @@ const config = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
-      fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamilyConfig.sans],
-      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 } satisfies Config
 
 export default config
