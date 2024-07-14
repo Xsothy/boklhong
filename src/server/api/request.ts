@@ -21,7 +21,8 @@ export class UserById extends TaggedRequest<UserById>()(
   {
     id: Schema.String,
   }
-) {}
+) {
+}
 
 // Request to create a new user
 export class UserCreate extends TaggedRequest<UserCreate>()(

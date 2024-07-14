@@ -32,9 +32,15 @@ const db = {
     }
 }
 
+export const userList = Rpc.effect(UserList, () => db.user.findMany())
+export const userById = Rpc.effect(UserById, ({ id }) => db.user.findById(id))
+const userCreate = Rpc.effect(UserCreate, ({ name }) => db.user.create(name))
 export const userRouter = Router.make(
-    Rpc.effect(UserList, () => db.user.findMany()),
-    Rpc.effect(UserById, ({ id }) => db.user.findById(id)),
-    Rpc.effect(UserCreate, ({ name }) => db.user.create(name))
+    userList,
+    userById,
+    userCreate
 )
 export type UserRouter = typeof userRouter
+export type UserListRpc = typeof userList
+export type UserByIdRpc = typeof userById
+export type UserCreateRpc = typeof userCreate

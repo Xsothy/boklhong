@@ -7,24 +7,20 @@ import type { NextApiRequest, NextApiResponse} from "next";
 import {NextResponse} from "next/server";
 
 import type { RPCRouterType } from "@/type";
-import {UserList} from "@/server/api/request";
+import {UserById, UserList} from "@/server/api/request";
 
 export const ApiRequest = Context.Tag<NextApiRequest>("@app/ApiRequest");
 
-export function make<R extends RPCRouterType>(router: R): (request: NextApiRequest, {params}: {
+export function make<R extends RPCRouterType.Router<any, any>>(router: R): (request: NextApiRequest, {params}: {
     params: { rpc: string }
 }) => Promise<NextResponse | Response> {
-    const handler = RPCRouter.toHandler(router);
-    const resolver = RPCResolver.make(handler)
-    const client = RPCResolver.toClient(
-        resolver(),
-    );
     function handleRequestResponse(
         request: NextApiRequest,
         { params }
     ): Promise<NextResponse | Response> {
         const rpcActions = {
             UserList: new UserList(),
+            UserById: new UserById({ id: "1" }),
             // Add other routes and corresponding RPC actions here
         };
         
@@ -34,8 +30,11 @@ export function make<R extends RPCRouterType>(router: R): (request: NextApiReque
             return Promise.resolve(NextResponse.json({ error: 'Unknown RPC action' }));
         }
         
-        return pipe(
-            client(rpcAction),
+        return router.pipe(
+            RPCRouter.toHandler,
+            (handler) => RPCResolver.make(handler),
+            (resolver) => RPCResolver.toClient(resolver()),
+            (client) => client(rpcAction),
             Effect.map((responses) => NextResponse.json(responses)),
             Effect.runPromise
         )
