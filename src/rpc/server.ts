@@ -32,10 +32,13 @@ export function make<R extends RPCRouterType.Router<any, any>>(router: R): (requ
         
         return router.pipe(
             RPCRouter.toHandler,
-            (handler) => RPCResolver.make(handler),
-            (resolver) => RPCResolver.toClient(resolver()),
+            RPCResolver.make,
+            (resolver) => resolver(),
+            RPCResolver.toClient,
             (client) => client(rpcAction),
-            Effect.map((responses) => NextResponse.json(responses)),
+            Effect.map(
+                (responses) => NextResponse.json(responses)
+            ),
             Effect.runPromise
         )
     }
